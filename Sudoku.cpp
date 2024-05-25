@@ -62,6 +62,7 @@ while (true)
     int choice;
     cout << "Enter Level complexity: "; 
     cin >> choice;
+    system("cls");
 
     switch (choice)
     {
