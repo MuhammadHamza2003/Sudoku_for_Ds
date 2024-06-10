@@ -25,6 +25,13 @@ void printBoard(const vector<vector<int>>& board) {
 
 // Function to check if a move is valid
 bool isValidMove(const vector<vector<int>>& board, int row, int col, int num) {
+
+    if (row < 0 || row >= SIZE)
+        return false;
+
+    if (col < 0 || col >= SIZE || num < 1 || num > SIZE) 
+        return false;
+
     for (int x = 0; x < SIZE; ++x) {
         if (board[row][x] == num || board[x][col] == num)
             return false;
@@ -46,6 +53,44 @@ bool isBoardComplete(const vector<vector<int>>& board) {
             if (board[row][col] == 0)
                 return false;
     return true;
+}
+
+
+void mainFunction(vector<vector<int>> &board){
+
+    vector<vector<int>> initialBoard = board; // Keep track of the initial puzzle
+
+        while (!isBoardComplete(board)) {
+            printBoard(board);
+            int row, col, num;
+            cout << "Enter row (1-9), column (1-9) and number (1-9) to place, or 0 to clear cell (or -1 to back): ";
+            cin >> row;
+            system("cls");
+            if (row == -1) {
+                break;
+            }
+            cin >> col >> num;
+            system("cls");
+            row--; col--; // adjust to 0-indexed
+
+            if (num == 0) {
+                if (initialBoard[row][col] == 0) {
+                    board[row][col] = 0;
+                    cout << "Cell cleared." << endl;
+                } else {
+                    cout << "Cannot clear a cell from the initial puzzle." << endl;
+                }
+            } else if (board[row][col] == 0 && isValidMove(board, row, col, num)) {
+                board[row][col] = num;
+            } else {
+                cout << "Invalid move. Try again." << endl;
+            }
+        }
+
+        if (isBoardComplete(board)) {
+            cout << "Congratulations! You've completed the Sudoku puzzle!" << endl;
+        }
+
 }
 
 int main() {
@@ -86,38 +131,7 @@ while (true)
             {7, 0, 3, 0, 1, 8, 0, 0, 0}
         };
 
-        vector<vector<int>> initialBoard = board; // Keep track of the initial puzzle
-
-        while (!isBoardComplete(board)) {
-            printBoard(board);
-            int row, col, num;
-            cout << "Enter row (1-9), column (1-9) and number (1-9) to place, or 0 to clear cell (or -1 to back): ";
-            cin >> row;
-            system("cls");
-            if (row == -1) {
-                break;
-            }
-            cin >> col >> num;
-            system("cls");
-            row--; col--; // adjust to 0-indexed
-
-            if (num == 0) {
-                if (initialBoard[row][col] == 0) {
-                    board[row][col] = 0;
-                    cout << "Cell cleared." << endl;
-                } else {
-                    cout << "Cannot clear a cell from the initial puzzle." << endl;
-                }
-            } else if (board[row][col] == 0 && isValidMove(board, row, col, num)) {
-                board[row][col] = num;
-            } else {
-                cout << "Invalid move. Try again." << endl;
-            }
-        }
-
-        if (isBoardComplete(board)) {
-            cout << "Congratulations! You've completed the Sudoku puzzle!" << endl;
-        }
+        mainFunction(board);      
     }
         break;
 
@@ -135,38 +149,7 @@ while (true)
             {0, 0, 0, 0, 8, 0, 0, 7, 9}
         };
 
-        vector<vector<int>> initialBoard = board; // Keep track of the initial puzzle
-
-        while (!isBoardComplete(board)) {
-            printBoard(board);
-            int row, col, num;
-            cout << "Enter row (1-9), column (1-9) and number (1-9) to place, or 0 to clear cell (or -1 to back): ";
-            cin >> row;
-            system("cls");
-            if (row == -1) {
-                break;
-            }
-            cin >> col >> num;
-            system("cls");
-            row--; col--; // adjust to 0-indexed
-
-            if (num == 0) {
-                if (initialBoard[row][col] == 0) {
-                    board[row][col] = 0;
-                    cout << "Cell cleared." << endl;
-                } else {
-                    cout << "Cannot clear a cell from the initial puzzle." << endl;
-                }
-            } else if (board[row][col] == 0 && isValidMove(board, row, col, num)) {
-                board[row][col] = num;
-            } else {
-                cout << "Invalid move. Try again." << endl;
-            }
-        }
-
-        if (isBoardComplete(board)) {
-            cout << "Congratulations! You've completed the Sudoku puzzle!" << endl;
-        }
+        mainFunction(board); 
     }
 
         break;
@@ -184,38 +167,7 @@ while (true)
             {0, 0, 9, 0, 0, 0, 0, 5, 0}
         };
 
-        vector<vector<int>> initialBoard = board; // Keep track of the initial puzzle
-
-        while (!isBoardComplete(board)) {
-            printBoard(board);
-            int row, col, num;
-            cout << "Enter row (1-9), column (1-9) and number (1-9) to place, or 0 to clear cell (or -1 to back): ";
-            cin >> row;
-            system("cls");
-            if (row == -1) {
-                break;
-            }
-            cin >> col >> num;
-            system("cls");
-            row--; col--; // adjust to 0-indexed
-
-            if (num == 0) {
-                if (initialBoard[row][col] == 0) {
-                    board[row][col] = 0;
-                    cout << "Cell cleared." << endl;
-                } else {
-                    cout << "Cannot clear a cell from the initial puzzle." << endl;
-                }
-            } else if (board[row][col] == 0 && isValidMove(board, row, col, num)) {
-                board[row][col] = num;
-            } else {
-                cout << "Invalid move. Try again." << endl;
-            }
-        }
-
-        if (isBoardComplete(board)) {
-            cout << "Congratulations! You've completed the Sudoku puzzle!" << endl;
-        }
+        mainFunction(board); 
     }
         break;
     default:
